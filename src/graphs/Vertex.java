@@ -1,6 +1,6 @@
 package graphs;
 
-public class Vertex implements Cloneable{
+public class Vertex {
 	private final String tag;
 	
 	public Vertex(String tag) {
@@ -23,4 +23,13 @@ public class Vertex implements Cloneable{
 		return new Vertex(this.getTag());
 	}
 	
+	public boolean equals(Vertex other) {
+		return this.getTag().equals(other.getTag());
+	}
+	
+	public boolean equals(Object o) {
+		if (!(o instanceof Vertex))
+			return false;
+		return this.equals((Vertex) o);
+	}
 }

@@ -17,16 +17,8 @@ public class Edge {
 		return this.in;
 	}
 	
-	public String getOutString() {
-		return this.out.toString();
-	}
-	
-	public String getInString() {
-		return this.in.toString();
-	}
-	
 	public String toString() {
-		return "("+this.getOutString()+","+this.getInString()+")";
+		return "("+getOut()+","+getIn()+")";
 	}
 
 }
