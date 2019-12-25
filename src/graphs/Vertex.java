@@ -1,22 +1,26 @@
 package graphs;
 
+import java.util.HashMap;
+
 public class Vertex {
 	private String tag;
+	private static HashMap<String, Vertex> vertexes = new HashMap<String, Vertex>();
 	
-	public Vertex(String tag) {
+	private Vertex(String tag) {
 		this.tag = tag;
+	}
+	
+	public Vertex getVertex(String tag) {
+		if (!(vertexes.containsKey(tag)))
+			synchronized (Vertex.class) {
+				if (!(vertexes.containsKey(tag)))
+					this.vertexes.put(tag, new Vertex(tag));
+			}
+		return vertexes.get(tag);
 	}
 	
 	public String getTag() {
 		return this.tag;
-	}
-	
-	public boolean setTag(String tag) {
-		if (this.tag.equals(tag))
-			return false;
-		else
-			this.tag = tag;
-			return true;
 	}
 	
 	public String toString() {

@@ -1,28 +1,34 @@
 package graphs;
 
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.HashSet;
 
 public class Edges {
-	private HashMap<Vertex, LinkedList<Vertex>> edges = new HashMap<Vertex, LinkedList<Vertex>>();
+	private HashMap<Vertex, HashSet<Vertex>> edges = new HashMap<Vertex, HashSet<Vertex>>();
 	
-	public Edges(Vertex[] vertexes) {
-		for (Vertex v : vertexes)
-			edges.put(v, new LinkedList<Vertex>());
-	}
+	public Edges() {}
 	
 	public boolean addEdge(Vertex out,Vertex in) {
-		if (isEdge(out,in))
-			return false;
-		return edges.get(out).add(in);
+		if (!(edges.containsKey(out)))
+			synchronized (edges) {
+				if (!(edges.containsKey(out)))
+					edges.put(out, new HashSet<Vertex>());
+			}
+		synchronized (edges.get(out)) {
+			return edges.get(out).add(in);	
+		}
 	}
 	
 	public boolean isEdge(Vertex out,Vertex in) {
-		return edges.get(out).contains(in);
+		synchronized (edges) {
+			return edges.get(out).contains(in);
+		}
 	}
 	
-	public LinkedList<Vertex> getAdjacentList(Vertex v){
-		return edges.get(v);
+	public HashSet<Vertex> getAdjacentList(Vertex v){
+		synchronized (edges.get(v)) {
+			return edges.get(v);
+		}
 	}
 
 }
