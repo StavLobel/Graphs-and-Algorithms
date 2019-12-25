@@ -3,7 +3,7 @@ package graphs;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MatrixGraph {
+public class MatrixGraph implements GraphRep {
 	private ArrayList<Vertex> vertexes;
 	private boolean[][] matrix;
 	
@@ -20,6 +20,12 @@ public class MatrixGraph {
 	
 	public boolean setEdge(Vertex u,Vertex v) {
 		return setEdge(new Edge(u, v));
+	}
+	
+	public boolean hasEdge(Edge e) {
+		int i = vertexes.indexOf(e.getOut());
+		int j = vertexes.indexOf(e.getIn());
+		return this.matrix[i][j];
 	}
 	
 	public String[][] getMatrix(){
