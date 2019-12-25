@@ -23,6 +23,7 @@ public class Test {
 		
 		Graph g = new Graph(vs, edges);
 		
+		
 		BFS bfs = new BFS(g, a);
 		System.out.println(bfs);
 	}
