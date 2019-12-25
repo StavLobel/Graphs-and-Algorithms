@@ -26,6 +26,8 @@ public class Edges {
 	}
 	
 	public HashSet<Vertex> getAdjacentList(Vertex v){
+		if (edges.get(v) == null)
+			return new HashSet<Vertex>();
 		synchronized (edges.get(v)) {
 			return edges.get(v);
 		}

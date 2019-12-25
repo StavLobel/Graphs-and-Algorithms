@@ -3,18 +3,18 @@ package graphs;
 import java.util.HashMap;
 
 public class Vertex {
-	private String tag;
+	private final String tag;
 	private static HashMap<String, Vertex> vertexes = new HashMap<String, Vertex>();
 	
 	private Vertex(String tag) {
 		this.tag = tag;
 	}
 	
-	public Vertex getVertex(String tag) {
+	public static Vertex getVertex(String tag) {
 		if (!(vertexes.containsKey(tag)))
 			synchronized (Vertex.class) {
 				if (!(vertexes.containsKey(tag)))
-					this.vertexes.put(tag, new Vertex(tag));
+					vertexes.put(tag, new Vertex(tag));
 			}
 		return vertexes.get(tag);
 	}
